@@ -1,5 +1,5 @@
 # php-storageserver
-<p>PHP storage system with directory listing.</p>
+<p>PHP file management system with directory listing.</p>
 <br />
 <p>Built by me and ChatGPT.</p>
 <p>The files are in Hungarian, but you can change it as you like.</p>
