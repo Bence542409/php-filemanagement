@@ -33,3 +33,7 @@
   <li>gives you the option to upload, rename or delete files and create or delete (only empty) directorys</li>
   <li>syntax: download.php?teszt/teszt.jpg</li>
 </ul>
+<p>.htaccess --></p>
+<ul>
+  <li></li>.
+</ul>
