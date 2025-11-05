@@ -1,15 +1,15 @@
 RewriteEngine On
 
 # Redirect example.com/admin
-RewriteRule ^admin https://example.com/server1/php/admin.php [R=301,L]
+RewriteRule ^admin https://example.com/php/admin.php [R=301,L]
 
 # If the URL starts with /download/
 RewriteCond %{REQUEST_URI} ^/download/([^/]+)
-RewriteRule ^download/(.*)$ https://example.com/server1/php/download.php?$1 [R=301,L]
+RewriteRule ^download/(.*)$ https://example.com/php/download.php?$1 [R=301,L]
 
 # If the URL's first character is a number
 RewriteCond %{REQUEST_URI} ^/([0-9][^/]*)
-RewriteRule ^([0-9][^/]*)/?$ https://example.com/server1/photo/%1/colored/ [R=301,L]
+RewriteRule ^([0-9][^/]*)/?$ https://example.com/photo/%1/colored/ [R=301,L]
 
 # If the URL's first character is not a number
 RewriteCond %{REQUEST_URI} !^/[0-9]
