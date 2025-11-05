@@ -273,7 +273,14 @@ document.addEventListener('keydown', e => {
         return;
     }
 
-    // ESC → kilépés az inputból
+    // ESC → egy directoryval feljebb, ha nem inputban vagyunk
+    if(e.key === "Escape" && document.activeElement !== searchInput){
+        e.preventDefault();
+        window.location.href = '../';
+        return;
+    }
+
+    // ESC → kilépés az inputból, ha inputban vagyunk
     if(e.key === "Escape" && document.activeElement === searchInput){
         e.preventDefault();
         searchInput.blur();

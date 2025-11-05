@@ -5,7 +5,7 @@ session_start();
  * Konfiguráció
  */
 $BASE_DIR = 'C:\\Users\\user\\Desktop\\server1\\'; // alapkönyvtár (Windows)
-$PASSWORD = 'admin'; // jelenlegi jelszó
+$PASSWORD = '904245'; // jelenlegi jelszó
 
 // segédfüggvények
 function join_path($base, $rel) {
@@ -106,6 +106,21 @@ if ($logged_in && isset($_POST['action']) && isset($_POST['csrf']) && hash_equal
 
                         // próbálja beállítani az olvasási jogokat (nix rendszereken)
                         @chmod($targetFull, 0644);
+                        
+                        // ZIP kicsomagolás, ha zip fájl
+                        if (strtolower(pathinfo($targetFull, PATHINFO_EXTENSION)) === 'zip') {
+                            $zip = new ZipArchive();
+                            if ($zip->open($targetFull) === true) {
+                                $extractPath = dirname($targetFull); // ugyanoda csomagoljuk
+                                $zip->extractTo($extractPath);
+                                $zip->close();
+                                @unlink($targetFull); // töröljük a zipet
+                                $message .= ' – ZIP kicsomagolva.';
+                            } else {
+                                $error = 'ZIP fájl megnyitása sikertelen.';
+                            }
+                        }
+
 
                         // Windows (IIS) alatt: próbáljuk meg NTFS ACL-t beállítani IUSR-nek
                         if (stripos(PHP_OS, 'WIN') === 0) {
