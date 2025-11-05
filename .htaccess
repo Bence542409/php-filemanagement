@@ -11,6 +11,6 @@ RewriteRule ^download/(.*)$ https://example.com/php/download.php?$1 [R=301,L]
 RewriteCond %{REQUEST_URI} ^/([0-9][^/]*)
 RewriteRule ^([0-9][^/]*)/?$ https://example.com/photo/%1/colored/ [R=301,L]
 
-# If the URL's first character is not a number
+# If the URL starts with a number
 RewriteCond %{REQUEST_URI} !^/[0-9]
 RewriteRule ^(.*)$ https://example.com/$1 [R=301,L]
