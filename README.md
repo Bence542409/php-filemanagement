@@ -37,5 +37,5 @@
 <ul>
   <li>redirects example.com/admin to example.com/php/admin.php</li>
   <li>redirects to example.com/php/download.php?$1 if the URL starts with /download/</li>
-  <li>redirects to example.com/photo/%1/colored/ if the URL starts with a number (<a href="https://github.com/Bence542409/php-gallery">to work with my php gallery system)</a></li>
+  <li>redirects to example.com/photo/%1/colored/ if the URL starts with a number (to work with my <a href="https://github.com/Bence542409/php-gallery">php gallery system)</a></li>
 </ul>
