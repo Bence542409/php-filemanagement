@@ -30,6 +30,7 @@
 <p>php/admin.php --></p>
 <ul>
   <li>gives you the option to upload, rename or delete files and create or delete (only empty) directorys</li>
+  <li>unzips the file after uploading, if the file is a .zip archive</li>
 </ul>
 <p>index_include.php --></p>
 <ul>
