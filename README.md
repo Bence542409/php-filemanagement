@@ -27,8 +27,9 @@
   <li>reads the file path to a file or folder and downloads it from one directory above (if the file is a directory, it makes a .zip archive of the folder before downloading)</li>
   <li>usage: download.php?folder/test.txt</li>
 </ul>
-<p>php/admin.php --></p>
+<p>php/admin/admin.php --></p>
 <ul>
+  <li>promts the user to login before commiting changes (default password: admin)<li>
   <li>gives you the option to upload, rename or delete files and create or delete (only empty) directorys</li>
   <li>unzips the file after uploading, if the file is a .zip archive</li>
 </ul>
