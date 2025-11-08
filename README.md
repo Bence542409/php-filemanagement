@@ -29,13 +29,20 @@
   <li>press the numeric keys (1 - 9) to open the selected result of the search</li>
   <li>press the '0' key to go to the parent directory</li>
 </ul>
+<p>php/login.php --></p>
+<ul>
+  <li>promts the user to login in (default password: admin)</li>
+  <li>unlocks root access in search.php and download.php</li>
+  <li>grants access to admin.php</li>
+</ul>
 <p>php/download.php --></p>
 <ul>
   <li>reads the file path to a file or folder from a specific directory, and downloads it from one directory above (if the file is a directory, it makes a .zip archive of the folder before downloading)</li>
+  <li>if the download resource is not in an allowed filepath, redirects to login.php (if user is not already authenitcated)</li>
 </ul>
 <p>php/admin.php --></p>
 <ul>
-  <li>promts the user to login before commiting changes (default password: admin)</li>
+  <li>redirects to login.php (if user is not already authenitcated)</li>
   <li>gives you the option to upload, rename or delete files and create or delete (only empty) directorys</li>
   <li>unzips the file after uploading, if the file is a .zip archive</li>
 </ul>
@@ -45,13 +52,12 @@
 </ul>
 <p>php/search.php --></p>
 <ul>
-  <li>option to grant public access to a specific subdirectory</li>
-  <li>log in to gain access to root directory</li>
   <li>option to search in allowed filepaths</li>
+  <li>button to log in using login.php to gain root access</li>
 </ul>
 <p>index_include.php --></p>
 <ul>
-  <li>refers to the code (php/index-dir.php) for easy copy-paste</li>
+  <li>refers to the code (php/index-dir.php) using its own directory</li>
 </ul>
 <p>.htaccess --></p>
 <ul>
