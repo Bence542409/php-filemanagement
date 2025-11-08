@@ -1,6 +1,6 @@
 <?php
 // download.php
-// Usage: /php/download.php?test/text.txt -> serves file ../test/text.txt
+// Usage: /php/download.php?ekke/bevinf -> serves file ../ekke/bevinf
 
 // Base directory: one level up from this script
 $baseDir = realpath(__DIR__ . '/..');
@@ -10,11 +10,27 @@ if ($baseDir === false) {
     exit;
 }
 
+// Csak ezekből a mappákból engedélyezzük a letöltést, relatív a baseDir-hez
+$ALLOWED_DIRS = [
+    'ekke',
+    'public'
+];
+
+function is_in_allowed_dirs($target, $baseDir, $allowedDirs) {
+    foreach ($allowedDirs as $dir) {
+        $dirPath = realpath($baseDir . DIRECTORY_SEPARATOR . $dir);
+        if ($dirPath && strpos($target, $dirPath) === 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
 // Get raw query string (everything after ?)
 $raw = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
 if ($raw === '') {
     http_response_code(400);
-    echo "No file specified.";
+    echo "No file specified.<br /><br />Usage: download.php?test/test.png";
     exit;
 }
 
@@ -52,6 +68,13 @@ if ($target === false) {
 if (strpos($target, $baseDir) !== 0) {
     http_response_code(403);
     echo "Access denied.";
+    exit;
+}
+
+// Biztonsági ellenőrzés: csak az engedélyezett mappákból lehet
+if (!is_in_allowed_dirs($target, $baseDir, $ALLOWED_DIRS)) {
+    http_response_code(403);
+    echo "Access to this directory is not allowed.";
     exit;
 }
 
@@ -132,4 +155,3 @@ if (is_file($target) && is_readable($target)) {
 http_response_code(404);
 echo "Not found.";
 exit;
-

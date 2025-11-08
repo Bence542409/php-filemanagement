@@ -63,7 +63,7 @@ $parentDirName = basename($baseDir);
 $allItems = array_diff(scandir($baseDir), ['.', '..', basename(__FILE__)]);
 
 // kizárt rendszerfájlok és ponttal kezdődő fájlok
-$excludedSystem = ['$RECYCLE.BIN','System Volume Information','web.config','index.php'];
+$excludedSystem = ['$RECYCLE.BIN','System Volume Information','web.config','index.php', 'admin.php'];
 
 $items = [];
 foreach ($allItems as $item) {
@@ -90,6 +90,33 @@ function formatSize($bytes){
     if ($bytes >= 1024) return round($bytes/1024,2).' KB';
     return $bytes.' B';
 }
+
+function getRelativePath($url, $baseDir = "/server1/", $parentDirName = "server1") {
+    // URL útvonal részének kinyerése
+    $path = parse_url($url, PHP_URL_PATH);
+    
+    // Base dir eltávolítása
+    $relative = str_replace($baseDir, "", $path);
+    
+    // Levágjuk a kezdő "/"-t, ha van
+    $relative = ltrim($relative, "/");
+
+    // Ha üres, akkor a parentDirName-t adjuk vissza
+    if (empty($relative)) {
+        return $parentDirName;
+    }
+
+    return $relative;
+}
+
+// Aktuális URL összeállítása
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+$host = $_SERVER['HTTP_HOST'];
+$path = $_SERVER['REQUEST_URI'];
+$currentUrl = $protocol . $host . $path;
+
+// Relatív út
+$relativePath = getRelativePath($currentUrl);
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -98,17 +125,69 @@ function formatSize($bytes){
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= htmlspecialchars($parentDirName) ?></title>
 <style>
-body{font-family:Arial,sans-serif;padding:20px;background:#f9f9f9;}
-.controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
-.controls input{flex:1;padding:8px;border:1px solid #ddd;border-radius:4px;}
-table{width:100%;border-collapse:collapse;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-th, td{text-align:left;padding:8px 10px;border-bottom:1px solid #ddd;}
-th{background:#007BFF;color:#fff;position:sticky;top:0;}
-a.folder-link{color:dodgerblue;text-decoration:none;}
-a.folder-link:hover{text-decoration:underline;}
-tr.hidden{display:none;}
-.header-container {display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:20px;}
-.header-stats {font-size:0.9em;color:#666;white-space:nowrap;}
+
+/* Chrome, Edge, Safari */
+body::-webkit-scrollbar {
+    width: 0;                    /* scrollbar szélesség 0 */
+    background: transparent;      /* háttér átlátszó */
+}
+body{ 
+    font-family:Arial,sans-serif;
+    padding:20px;
+    background:#f9f9f9;
+}
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.controls input{flex:1;
+    padding:8px;
+    border:1px solid #ddd;
+    border-radius:4px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+th, td{
+    text-align:left;
+    padding:8px 10px;
+    border-bottom:1px solid #ddd;
+}
+th{
+    background:#007BFF;
+    color:#fff;
+    position:sticky;
+    top:0;
+}
+a.folder-link{
+    color:dodgerblue;
+    text-decoration:none;
+}
+a.folder-link:hover{
+    text-decoration:underline;
+}
+tr.hidden{
+    display:none;
+}
+.header-container {
+    display:flex;
+    justify-content:
+        space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+.header-stats {
+    font-size:0.9em;
+    color:#666;
+    white-space:nowrap;
+}
 
 .download-icon {
     display:inline-block;
@@ -119,7 +198,7 @@ tr.hidden{display:none;}
     opacity:1;
     text-align: center;
 }
-.download-icon:hover {
+.download-icon:hover, .controls a:hover {
     opacity:0.5;
 }
     
@@ -175,20 +254,46 @@ tr.hidden{display:none;}
 
     .title { font-size:28px; margin-bottom:10px; }
     .header-stats { display:none; }
+    
+    .icons {
+        display: none;
+    }
 }
 
 </style>
 </head>
 <body>
 <div class="header-container">
-    <h1 class="title"><?= htmlspecialchars($parentDirName) ?></h1>
+    <h1 class="title"><?php echo htmlspecialchars($relativePath); ?></h1>
     <div class="header-stats">
         Elemek: <?= $totalItems ?>
     </div>
 </div>
-
+    
 <div class="controls">
     <input type="text" id="search" placeholder="Keresés...">
+    
+    <a href="/server1/php/search.php?q=<?php echo htmlspecialchars($relativePath); ?>" title="Keresés az összes almappában" style="text-decoration:none; color:inherit; margin-right: 7px" class="icons">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    </a>
+    <a href="/server1/php/download.php?<?php echo htmlspecialchars($relativePath); ?>" title="Letöltés" style="text-decoration:none; color:inherit; margin-right: 7px" class="icons">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+    </a>
+    <a href="/server1/php/admin.php" title="Bejelentkezés" style="text-decoration:none; color:inherit;" class="icons">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M6 20v-2a6 6 0 0 1 12 0v2"></path>
+        <line x1="16" y1="11" x2="20" y2="11"></line>
+        <polyline points="18 9 20 11 18 13"></polyline>
+    </svg>
+    </a>
 </div>
 
 <table id="folderTable">
