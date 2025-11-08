@@ -142,12 +142,15 @@ body{
     gap: 10px;
     margin-bottom: 20px;
     align-items: center;
+    background: white;
+    border-radius: 5px;
 }
 
 .controls input{flex:1;
-    padding:8px;
+    padding:12px;
     border:1px solid #ddd;
-    border-radius:4px;
+    border-radius:5px;
+    border: none;
 }
 table{
     width:100%;
@@ -286,7 +289,7 @@ tr.hidden{
         <line x1="12" y1="15" x2="12" y2="3"></line>
     </svg>
     </a>
-    <a href="/server1/php/admin.php" title="Bejelentkezés" style="text-decoration:none; color:inherit;" class="icons">
+    <a href="/server1/php/admin.php" title="Bejelentkezés" style="text-decoration:none; color:inherit; margin-right: 7px" class="icons">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="8" r="4"></circle>
         <path d="M6 20v-2a6 6 0 0 1 12 0v2"></path>
@@ -431,6 +434,29 @@ document.addEventListener('keydown', e => {
         e.preventDefault();
         return;
     }
+    
+        // K, L, A gyorsbillentyűk (ha nem inputban vagyunk)
+    if (document.activeElement !== searchInput) {
+        if (e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            const searchIcon = document.querySelector('.controls a[title="Keresés az összes almappában"]');
+            if (searchIcon) window.location.href = searchIcon.href;
+            return;
+        }
+        if (e.key.toLowerCase() === 'l') {
+            e.preventDefault();
+            const downloadIcon = document.querySelector('.controls a[title="Letöltés"]');
+            if (downloadIcon) window.location.href = downloadIcon.href;
+            return;
+        }
+        if (e.key.toLowerCase() === 'a') {
+            e.preventDefault();
+            const adminIcon = document.querySelector('.controls a[title="Bejelentkezés"]');
+            if (adminIcon) window.location.href = adminIcon.href;
+            return;
+        }
+    }
+
 });
 
 </script>
