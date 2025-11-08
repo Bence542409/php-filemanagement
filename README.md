@@ -15,13 +15,15 @@
   <li>option to browse between folders and files in the directory</li>
   <li>counts the number of files (only on desktop view)</li>
   <li>press the search-all icon or the 'K' key to search in all subdirectories (only on desktop view)</li>
-  <li>press the download-folder icon or the 'L' key to download all the files in the directory (only on desktop view)</li>
+  <li>press the download-folder icon or the 'L' key (while no records are selected) to download all the files in the directory (only on desktop view)</li>
   <li>press the login icon or the 'A' key to open the admin panel (only on desktop view)</li>
-  <li>press the download button to download files or folders individually (if the file is a directory, it makes a .zip archive of the folder before downloading)</li>
+  <li>press the download button or the 'L' key (while records are selected) to download files or folders individually (if the file is a directory, it makes a .zip archive of the folder before downloading)</li>
   <li>press the "backspace" key to go to the previous page (while textbox is inactive)</li>
-  <li>press the "enter" key to focus the search input (while textbox is inactive)</li>
-  <li>press "enter" while the textbox is active to open the first result of the search</li>
-  <li>press the "esc" key to defocus the search input (while textbox is active)</li>
+  <li>press the arrow keys to move between records</li>
+  <li>press the "enter" key to focus the search input (while textbox is inactive and no records are selected)</li>
+  <li>press "enter" while the textbox is active and no records are selected to open the first result of the search</li>
+  <li>press "enter" while records are selected to open that specific record</li>
+  <li>press the "esc" key to defocus the search input and selected records</li>
   <li>press the "esc" key to go to the parent directory (while textbox is inactive)</li>
   <li>press the "tab" key to reset the search input</li>
   <li>press the numeric keys (1 - 9) to open the selected result of the search</li>
