@@ -137,7 +137,7 @@ a:hover { text-decoration:underline; }
 
     <?php if (isset($_GET['q'])): ?>
         <?php if (empty($results)): ?>
-            <p style="font-size:13px; color:#555; margin-top:10px;">Nincs találat.</p>
+            <p style="font-size:13px; color:red; margin-top:30px;">Nincs találat, vagy nincs engedélye az útvonalhoz.</p>
         <?php else: ?>
             <h3 style="margin-top:15px;">Találatok: <?php echo count($results); ?></h3>
             <ul>
@@ -154,3 +154,4 @@ a:hover { text-decoration:underline; }
 </div>
 </body>
 </html>
+
