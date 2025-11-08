@@ -12,7 +12,7 @@
   <li>reads the name of the directory (if direcrory is root)</li>
   <li>hides itself and other system files</li>
   <li>opens picture, video, pdf and php files in browser</li>
-  <li>option to browse between folders and files in the direcrory</li>
+  <li>option to browse between folders and files in the directory</li>
   <li>counts the number of files (only on desktop view)</li>
   <li>press the search-all icon to search in all subdirectories (only on desktop view)</li>
   <li>press the download-folder icon to download all the files in the directory (only on desktop view)</li>
