@@ -1,5 +1,10 @@
 RewriteEngine On
 
+RewriteRule ^photo$ https://example.com/photo/ [R=301,L]
+RewriteRule ^admin https://example.com/php/admin.php [R=301,L]
+RewriteRule ^search https://example.com/php/search.php [R=301,L]
+RewriteRule ^upload https://example.com/php/upload.php [R=301,L]
+
 # Redirect example.com/admin
 RewriteRule ^admin https://example.com/php/admin.php [R=301,L]
 
@@ -11,6 +16,6 @@ RewriteRule ^download/(.*)$ https://example.com/php/download.php?$1 [R=301,L]
 RewriteCond %{REQUEST_URI} ^/([0-9][^/]*)
 RewriteRule ^([0-9][^/]*)/?$ https://example.com/photo/%1/colored/ [R=301,L]
 
-# If the URL starts with a number
+# If the URL's first character is not a number
 RewriteCond %{REQUEST_URI} !^/[0-9]
 RewriteRule ^(.*)$ https://example.com/$1 [R=301,L]
