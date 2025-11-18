@@ -15,10 +15,17 @@
   <li>opens picture, video, pdf and php files in browser</li>
   <li>option to browse between folders and files in the directory</li>
   <li>counts the number of files (only on desktop view)</li>
-  <li>press the search-all icon or the 'K' key to search in all subdirectories (only on desktop view)</li>
-  <li>press the download-folder icon or the 'L' key (while no records are selected) to download all the files in the directory (only on desktop view)</li>
-  <li>press the login icon or the 'A' key to open the admin panel (only on desktop view)</li>
-  <li>press the download button or the 'L' key (while records are selected) to download files or folders individually (if the file is a directory, it makes a .zip archive of the folder before downloading)</li>
+  <li>press the search-all icon or the 'S' key to search in all subdirectories (only on desktop view)</li>
+  <li>press the download-folder icon or the 'D' key (while no records are selected) to download all the files in the directory (only on desktop view)</li>
+  <li>press the login icon or the 'A' key to log in as admin (only on desktop view)</li>
+  <li>press the logout icon or the 'Q' key to log out (only on desktop view)</li>
+  <li>press the file-create icon or the 'N' key to create a file/folder (only on desktop view)</li>
+  <li>press the file-upload icon or the 'U' key to upload a file (unzips the file if the file is a .zip archive) (only on desktop view)</li>
+  <li>press the download button or the 'D' key (while records are selected) to download files or folders individually (if the file is a directory, it makes a .zip archive of the folder before downloading)</li>
+  <li>press the edit button or the 'E' key (while records are selected) to edit the contents of the selected file</li>
+  <li>press the rename button or the 'R' key (while records are selected) to rename the selected file/folder</li>
+  <li>press the move button or the 'M' key (while records are selected) to move the selected file/folder to another location</li>
+  <li>press the delete button or the "delete" key (while records are selected) to delete the selected file(s)/folder(s)</li>
   <li>press the "backspace" key to go to the previous page (while textbox is inactive)</li>
   <li>use the arrow keys to move between records</li>
   <li>press the "enter" key to focus the search input (while textbox is inactive and no records are selected)</li>
@@ -35,6 +42,11 @@
   <li>promts the user to login in (default password: admin)</li>
   <li>unlocks root access in search.php and download.php</li>
   <li>grants access to admin.php</li>
+  <li>grants admin privilages to index_dir.php</li>
+</ul>
+<p>php/logout --></p>
+<ul>
+  <li>logs out the user when opened</li>
 </ul>
 <p>php/download.php --></p>
 <ul>
